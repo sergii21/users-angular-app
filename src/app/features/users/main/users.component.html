@@ -1,0 +1,7 @@
+<div class="col-span-2">
+  <button class="bg-blue-500 text-white" (click)="onCreate()">Create User</button>
+</div>
+
+<app-user-table-container></app-user-table-container>
+
+<app-user-form-container *ngIf="isFormVisible$|async"></app-user-form-container>

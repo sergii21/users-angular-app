@@ -1,0 +1,13 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+  <input type="text" formControlName="username" />
+  <input type="text" formControlName="firstName" />
+  <input type="text" formControlName="lastName" />
+  <input type="email" formControlName="email" />
+  <input type="password" formControlName="password" />
+  <select formControlName="type">
+    <option value="Admin"></option>
+    <option value="Driver"></option>
+  </select>
+  <button type="submit" (click)="onDelete(user)">Delete</button>
+  <button type="submit" [disabled]="!userForm.valid">Save</button>
+</form>
