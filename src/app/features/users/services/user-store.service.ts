@@ -37,4 +37,11 @@ export class UserStoreService {
   userClick(user: User) {
     this.store.dispatch(UserViewActions.userClick({ id: user.id }));
   }
+
+  delete(user: User) {
+    this.store.dispatch(UsersActions.deleteUser({ id: user.id }));
+  }
+  submitForm(user: User) {
+    this.store.dispatch(UsersActions.upsertUser({ user }));
+  }
 }

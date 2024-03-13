@@ -12,9 +12,14 @@ export const selectIsFormVisible = createSelector(
   (state) => state.isUserFormVisible
 );
 
-export const selectCurrentUser = createSelector(
+export const selectCurrentUserId = createSelector(
   selectUsersFeature,
+  (state) => state.currentUserId
+);
+
+export const selectCurrentUser = createSelector(
   UserSelectors.selectEntities,
-  (state, entities) =>
-    (entities ? entities[state.currentUserId] : newUser) as User
+  selectCurrentUserId,
+  (entities, currentUserId) =>
+    (entities[currentUserId] ? entities[currentUserId] : newUser) as User
 );

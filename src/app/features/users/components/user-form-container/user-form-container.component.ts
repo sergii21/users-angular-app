@@ -18,4 +18,10 @@ export class UserFormContainerComponent implements OnInit {
   ngOnInit(): void {
     this.user$ = this.userStoreService.selectCurrentUser();
   }
+  onSubmitForm(user: User) {
+    this.userStoreService.submitForm(user);
+  }
+  onDelete(user: User) {
+    this.userStoreService.delete(user);
+  }
 }

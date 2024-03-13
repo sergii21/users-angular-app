@@ -18,4 +18,7 @@ export class UserTableContainerComponent implements OnInit {
   ngOnInit(): void {
     this.users$ = this.userStoreService.selectUsers();
   }
+  onUserClick(user: User) {
+    this.userStoreService.userClick(user);
+  }
 }

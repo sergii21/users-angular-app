@@ -1,1 +1,1 @@
-<app-user-table [users]="users$ | async"></app-user-table>
+<app-user-table [users]="users$ | async" (userClick)="onUserClick($event)"></app-user-table>

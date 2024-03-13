@@ -1,1 +1,1 @@
-<app-user-form [user]="user$|async"></app-user-form>
+<app-user-form [user]="user$|async" (submitForm)="onSubmitForm($event)" (delete)="onDelete($event)"></app-user-form>

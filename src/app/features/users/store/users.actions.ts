@@ -12,8 +12,8 @@ export const UsersActions = createActionGroup({
     'Upsert Users': props<{ users: User[] }>(),
     'Update User': props<{ user: Update<User> }>(),
     'Update Users': props<{ users: Update<User>[] }>(),
-    'Delete User': props<{ id: string }>(),
-    'Delete Users': props<{ ids: string[] }>(),
+    'Delete User': props<{ id: number }>(),
+    'Delete Users': props<{ ids: number[] }>(),
     'Clear Users': emptyProps(),
   },
 });

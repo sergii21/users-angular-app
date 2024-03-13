@@ -52,10 +52,12 @@ export const reducer = createReducer(
   on(UserViewActions.createButtonClick, (state) => ({
     ...state,
     isUserFormVisible: true,
+    currentUserId: 0,
   })),
   on(UserViewActions.userClick, (state, action) => ({
     ...state,
     currentUserId: action.id,
+    isUserFormVisible: true,
   }))
 );
 

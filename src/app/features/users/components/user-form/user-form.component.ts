@@ -28,16 +28,34 @@ export class UserFormComponent implements OnChanges {
   @Output() submitForm = new EventEmitter<User>();
   @Output() delete = new EventEmitter<User>();
   userForm!: FormGroup;
+  mode: 'create' | 'update' = 'create';
+
+  public get isCreateMode(): boolean {
+    return this.mode === 'create';
+  }
+  public get isUpdateMode(): boolean {
+    return this.mode === 'update';
+  }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user']) {
+      this.setMode();
       if (this.userForm) {
         this.patchForm();
       } else {
         this.createForm();
+        this.patchForm();
       }
+    }
+  }
+
+  private setMode() {
+    if (this.user?.id) {
+      this.mode = 'update';
+    } else {
+      this.mode = 'create';
     }
   }
 
@@ -59,7 +77,7 @@ export class UserFormComponent implements OnChanges {
   }
 
   onSubmit() {
-    this.submitForm.emit(this.userForm.value());
+    this.submitForm.emit({ ...this.user, ...this.userForm.value });
   }
 
   onDelete(user: User) {
