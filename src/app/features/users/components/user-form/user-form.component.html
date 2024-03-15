@@ -1,75 +1,76 @@
+<div class="card card_padding">
+  <h2 class="h2 h2_space-bottom" *ngIf="isCreateMode">Create new user</h2>
+  <h2 class="h2 h2_space-bottom" *ngIf="isUpdateMode">
+    {{ user.firstName }} {{ user.lastName }}
+  </h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+    <div class="form-control">
+      <label class="label" for=""
+        >Username<span class="label_hint">*</span></label
+      >
+      <input class="input" type="text" formControlName="username" appFormControlValidationMsg validationMsgId="username"/>
+      <!-- <span class="hint hint-error"></span> -->
+    </div>
+    <div class="form-control">
+      <label class="label" for=""
+        >First name<span class="label_hint">*</span></label
+      >
+      <input class="input" type="text" formControlName="firstName" appFormControlValidationMsg validationMsgId="firstName"/>
+      <span class="hint hint-error"></span>
+    </div>
+    <div class="form-control">
+      <label class="label" for=""
+        >Last name<span class="label_hint">*</span></label
+      >
+      <input class="input" type="text" formControlName="lastName" appFormControlValidationMsg validationMsgId="lastName"/>
+      <span class="hint hint-error"></span>
+    </div>
+    <div class="form-control">
+      <label class="label" for="">Email<span class="label_hint">*</span></label>
+      <input class="input" type="text" formControlName="email" appFormControlValidationMsg validationMsgId="email"/>
+      <span class="hint hint-error"></span>
+    </div>
+    <div class="form-control">
+      <label class="label" for="">Type<span class="label_hint">*</span></label>
+      <select class="select" formControlName="type" appFormControlValidationMsg validationMsgId="type">
+        <option value="Admin">Admin</option>
+        <option value="Driver">Driver</option>
+      </select>
+      <span class="hint hint-error"></span>
+    </div>
+    <div class="form-control">
+      <label class="label" for=""
+        >Password<span class="label_hint">*</span></label
+      >
+      <input class="input" type="text" formControlName="password" appFormControlValidationMsg validationMsgId="password"/>
+      <span class="hint hint-error"></span>
+    </div>
+    <div class="form-control">
+      <label class="label" for=""
+        >Repeat password<span class="label_hint">*</span></label
+      >
+      <input class="input" type="text" formControlName="repeatPassword" appFormControlValidationMsg validationMsgId="repeatPassword"/>
+      <span class="hint hint-error"></span>
+    </div>
 
-  <div class="card card_padding">
-    <h2 class="h2 h2_space-bottom" *ngIf="isCreateMode">Create new user</h2>
-    <h2 class="h2 h2_space-bottom" *ngIf="isUpdateMode">
-      {{ user.firstName }} {{ user.lastName }}
-    </h2>
-    <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
-      <div class="form-control">
-        <label class="label" for=""
-          >Username<span class="label_hint">*</span></label
-        >
-        <input class="input" type="text" formControlName="username" />
-        <span class="hint hint-error"></span>
-      </div>
-      <div class="form-control">
-        <label class="label" for=""
-          >First name<span class="label_hint">*</span></label
-        >
-        <input class="input" type="text" formControlName="firstName" />
-        <span class="hint hint-error"></span>
-      </div>
-      <div class="form-control">
-        <label class="label" for=""
-          >Last name<span class="label_hint">*</span></label
-        >
-        <input class="input" type="text" formControlName="lastName" />
-        <span class="hint hint-error"></span>
-      </div>
-      <div class="form-control">
-        <label class="label" for=""
-          >Email<span class="label_hint">*</span></label
-        >
-        <input class="input" type="text" formControlName="email" />
-        <span class="hint hint-error"></span>
-      </div>
-      <div class="form-control">
-        <label class="label" for=""
-          >Type<span class="label_hint">*</span></label
-        >
-        <select class="select" formControlName="type">
-          <option value="Admin">Admin</option>
-          <option value="Driver">Driver</option>
-        </select>
-        <span class="hint hint-error"></span>
-      </div>
-      <div class="form-control">
-        <label class="label" for=""
-          >Password<span class="label_hint">*</span></label
-        >
-        <input class="input" type="text" formControlName="password" />
-        <span class="hint hint-error"></span>
-      </div>
-      <div class="form-control">
-        <label class="label" for=""
-          >Repeat password<span class="label_hint">*</span></label
-        >
-        <input class="input" type="text" formControlName="password" />
-        <span class="hint hint-error"></span>
-      </div>
-
-      <div class="footer">
-        <input
-          class="button button_color-primary button_center"
-          type="submit"
-          value="Create"
-        />
-        <input
-          class="button button_color-danger"
-          type="submit"
-          value="Delete"
-        />
-        <input class="button button_color-primary" type="submit" value="Save" />
-      </div>
-    </form>
-  </div>
+    <div class="footer">
+      <button
+        *ngIf="isCreateMode"
+        class="button button_color-primary button_center"
+        type="submit"
+        appFormSubmitValidationMsg [validationControl]="userForm"
+      >Create</button>
+      <button
+        *ngIf="isUpdateMode"
+        class="button button_color-danger"
+        (click)="onDelete(user)"
+      >Delete</button>
+      <button
+        *ngIf="isUpdateMode"
+        class="button button_color-primary"
+        type="submit"
+        appFormSubmitValidationMsg [validationControl]="userForm"
+      >Save</button>
+    </div>
+  </form>
+</div>

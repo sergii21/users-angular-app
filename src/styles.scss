@@ -1,3 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('./styles/reset.scss');
+@import url('./styles/colors.scss');
 @import url('./styles/general.scss');
+
+@import url('./styles/button.scss');
+@import url('./styles/form.scss');
+@import url('./styles/layout.scss');
+@import url('./styles/table.scss');
+@import url('./styles/text.scss');

@@ -1,0 +1,25 @@
+.button {
+  cursor: pointer;
+  padding: 16px;
+  min-width: 120px;
+  box-shadow: 0px 5px 8px #2e8ff029;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.button_color-primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+.button_color-danger {
+  background-color: var(--danger-color);
+  color: var(--white-color);
+}
+
+
+.button_center {
+  margin: auto;
+}
+.button_right {
+  float: right;
+}

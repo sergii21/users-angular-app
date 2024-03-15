@@ -1,0 +1,27 @@
+.input, .select {
+  border-radius: 6px;
+  height: 46px;
+  width: 100%;
+  background-color: var(--grey--color-light);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.form-control {
+  margin-bottom: 10px;
+}
+.form-control_error .input,
+.form-control_error .select {
+  border: 1px solid var(--danger-color);
+}
+.label {
+  font: normal normal normal 13px/16px Helvetica;
+  color: var(--grey-color-text);
+}
+.hint {
+  display: block;
+  font: normal normal normal 13px/16px Helvetica;
+  color: var(--grey-color-text);
+}
+.hint-error {
+  color: var(--danger-color);
+}

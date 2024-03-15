@@ -7,6 +7,8 @@ export const MockUser: User = {
   lastName: 'Nahornyi',
   email: 'serjvnet@gmail.com',
   type: 'Admin',
+  password: '1111',
+  repeatPassword: '1111',
 };
 
 export const MockUsers: User[] = [

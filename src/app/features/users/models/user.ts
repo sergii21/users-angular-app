@@ -1,5 +1,3 @@
-import { UserType } from '../enum/user-type';
-
 export interface User {
   id: number;
   username: string;
@@ -7,6 +5,8 @@ export interface User {
   lastName: string;
   email: string;
   type: string;
+  password: string;
+  repeatPassword: string;
 }
 
 export const newUser: User = {
@@ -16,4 +16,6 @@ export const newUser: User = {
   lastName: '',
   email: '',
   type: '',
+  password: '',
+  repeatPassword: ''
 };

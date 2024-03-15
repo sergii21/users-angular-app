@@ -1,0 +1,21 @@
+.table {
+  width: 100%;
+}
+.thead {
+  color: var(--grey-color-text);
+  text-align: left;
+  text-transform: uppercase;
+}
+.table th,
+.table td {
+  padding: 22px 26px;
+}
+.tbody tr {
+  cursor: pointer;
+  background-color: var(--grey--color-light);
+  border-bottom: 2px solid var(--white-color);
+}
+.tfoot {
+  display: block;
+  min-height: 60px;
+}

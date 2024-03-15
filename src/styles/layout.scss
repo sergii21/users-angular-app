@@ -1,0 +1,50 @@
+
+.header {
+  grid-area: header;
+}
+.content__left {
+  grid-area: main;
+}
+.content__right {
+  grid-area: sidebar;
+}
+.footer {
+  grid-area: footer;
+}
+
+.content {
+  padding: 30px;
+  min-width: 400px;
+  height: 100%;
+  display: grid;
+  column-gap: 26px;
+  row-gap: 16px;
+  grid-template-columns: auto 584px;
+  grid-template-rows: 50px 711px 50px;
+  grid-template-areas:
+    "header ."
+    "main sidebar"
+    "footer footer";
+}
+
+.body_background_primary {
+  background-color: var(--grey-color);
+}
+
+
+.card {
+  overflow: auto;
+  box-shadow: 0px 0px 30px #523f690d;
+  border-radius: 6px;
+  background-color: var(--white-color);
+  height: 100%;
+}
+.card_padding {
+  padding: 26px;
+}
+
+.footer {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+}
