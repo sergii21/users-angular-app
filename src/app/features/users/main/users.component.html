@@ -1,7 +1,18 @@
-<div class="col-span-2">
-  <button class="bg-blue-500 text-white" (click)="onCreate()">Create User</button>
+<div class="content">
+  <div class="header">
+    <button
+      class="button button_color-primary button_right"
+      (click)="onCreate()"
+    >
+      Create User
+    </button>
+  </div>
+
+  <app-user-table-container class="content__left"></app-user-table-container>
+
+  <div class="footer"></div>
+
+  <app-user-form-container class="content__right"
+    *ngIf="isFormVisible$ | async"
+  ></app-user-form-container>
 </div>
-
-<app-user-table-container></app-user-table-container>
-
-<app-user-form-container *ngIf="isFormVisible$|async"></app-user-form-container>

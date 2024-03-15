@@ -1,16 +1,75 @@
-<h1 *ngIf="isCreateMode">Create new user</h1>
-<h1 *ngIf="isUpdateMode">{{user.firstName}} {{user.lastName}}</h1>
-<form (ngSubmit)="onSubmit()" [formGroup]="userForm">
-  <input type="text" formControlName="username" />
-  <input type="text" formControlName="firstName" />
-  <input type="text" formControlName="lastName" />
-  <input type="email" formControlName="email" />
-  <input type="password" formControlName="password" />
-  <select formControlName="type">
-    <option value="Admin">Admin</option>
-    <option value="Driver">Driver</option>
-  </select>
-  <button *ngIf="isUpdateMode" type="submit" (click)="onDelete(user)">Delete</button>
-  <button *ngIf="isUpdateMode" type="submit" [disabled]="!userForm.valid">Save</button>
-  <button *ngIf="isCreateMode" type="submit" [disabled]="!userForm.valid">Create</button>
-</form>
+
+  <div class="card card_padding">
+    <h2 class="h2 h2_space-bottom" *ngIf="isCreateMode">Create new user</h2>
+    <h2 class="h2 h2_space-bottom" *ngIf="isUpdateMode">
+      {{ user.firstName }} {{ user.lastName }}
+    </h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+      <div class="form-control">
+        <label class="label" for=""
+          >Username<span class="label_hint">*</span></label
+        >
+        <input class="input" type="text" formControlName="username" />
+        <span class="hint hint-error"></span>
+      </div>
+      <div class="form-control">
+        <label class="label" for=""
+          >First name<span class="label_hint">*</span></label
+        >
+        <input class="input" type="text" formControlName="firstName" />
+        <span class="hint hint-error"></span>
+      </div>
+      <div class="form-control">
+        <label class="label" for=""
+          >Last name<span class="label_hint">*</span></label
+        >
+        <input class="input" type="text" formControlName="lastName" />
+        <span class="hint hint-error"></span>
+      </div>
+      <div class="form-control">
+        <label class="label" for=""
+          >Email<span class="label_hint">*</span></label
+        >
+        <input class="input" type="text" formControlName="email" />
+        <span class="hint hint-error"></span>
+      </div>
+      <div class="form-control">
+        <label class="label" for=""
+          >Type<span class="label_hint">*</span></label
+        >
+        <select class="select" formControlName="type">
+          <option value="Admin">Admin</option>
+          <option value="Driver">Driver</option>
+        </select>
+        <span class="hint hint-error"></span>
+      </div>
+      <div class="form-control">
+        <label class="label" for=""
+          >Password<span class="label_hint">*</span></label
+        >
+        <input class="input" type="text" formControlName="password" />
+        <span class="hint hint-error"></span>
+      </div>
+      <div class="form-control">
+        <label class="label" for=""
+          >Repeat password<span class="label_hint">*</span></label
+        >
+        <input class="input" type="text" formControlName="password" />
+        <span class="hint hint-error"></span>
+      </div>
+
+      <div class="footer">
+        <input
+          class="button button_color-primary button_center"
+          type="submit"
+          value="Create"
+        />
+        <input
+          class="button button_color-danger"
+          type="submit"
+          value="Delete"
+        />
+        <input class="button button_color-primary" type="submit" value="Save" />
+      </div>
+    </form>
+  </div>
