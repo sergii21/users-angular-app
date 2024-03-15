@@ -1,3 +1,5 @@
+<img width="1527" alt="image" src="https://github.com/sergii21/users-angular-app/assets/26361223/f5791313-c281-4772-b352-212e2fe2c8c9">
+
 # UsersAngularApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
