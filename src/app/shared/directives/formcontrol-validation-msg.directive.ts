@@ -21,7 +21,7 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
     private validationMsgService: ValidationMsgService
   ) {}
 
-  @Input('validationMsgId') validationMsgId!: string;
+  @Input() validationMsgId!: string;
   errorSpanId: string = '';
 
   statusChangeSubscription!: Subscription | undefined;

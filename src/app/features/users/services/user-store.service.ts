@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { UsersState } from '../store/users.reducer';
 import { Store } from '@ngrx/store';
@@ -41,7 +41,10 @@ export class UserStoreService {
   delete(user: User) {
     this.store.dispatch(UsersActions.deleteUser({ id: user.id }));
   }
-  submitForm(user: User) {
-    this.store.dispatch(UsersActions.upsertUser({ user }));
+  create(user: User) {
+    this.store.dispatch(UsersActions.addUser({ user }));
+  }
+  save(user: User) {
+    this.store.dispatch(UsersActions.updateUser({ user: { id: user.id, changes: user } }));
   }
 }

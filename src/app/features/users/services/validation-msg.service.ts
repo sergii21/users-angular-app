@@ -10,6 +10,7 @@ export class ValidationMsgService {
 
   private errorMessages: { [key: string]: string } = {
     'username-required-msg': 'This field is a required field',
+    'username-uniqueUserName-msg': 'The username already taken',
     'firstName-required-msg': 'This field is a required field',
     'lastName-required-msg': 'This field is a required field',
     'email-required-msg': 'This field is a required field',

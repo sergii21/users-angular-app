@@ -5,6 +5,9 @@
   box-shadow: 0px 5px 8px #2e8ff029;
   border-radius: 6px;
   text-align: center;
+  &[disabled] {
+    background-color: var(--grey-color-dark);
+  }
 }
 
 .button_color-primary {

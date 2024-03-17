@@ -1,13 +1,13 @@
+import { UniqueUserNameValidator } from './../../validators/unique-user.validator';
 import {
   Component,
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { User, newUser } from '../../models/user';
+import { User } from '../../models/user';
 import {
   FormBuilder,
   FormGroup,
@@ -15,11 +15,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ServerValidationError } from '../../models/server-validation-error';
-import { FormSubmitValidationMsgDirective } from '../../../../shared/directives/formsubmit-validation-msg.directive';
 import { FormControlValidationMsgDirective } from '../../../../shared/directives/formcontrol-validation-msg.directive';
+import { FormSubmitValidationMsgDirective } from '../../../../shared/directives/formsubmit-validation-msg.directive';
 
-export const StrongPasswordRegx: RegExp = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
+export const StrongPasswordRegx: RegExp =
+  /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
+
 @Component({
   selector: 'app-user-form',
   standalone: true,
@@ -34,8 +35,8 @@ export const StrongPasswordRegx: RegExp = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$
 })
 export class UserFormComponent implements OnChanges {
   @Input() user!: User;
-  @Input() validationErrors!: ServerValidationError[];
-  @Output() submitForm = new EventEmitter<User>();
+  @Output() create = new EventEmitter<User>();
+  @Output() save = new EventEmitter<User>();
   @Output() delete = new EventEmitter<User>();
   userForm!: FormGroup;
   mode: 'create' | 'update' = 'create';
@@ -47,7 +48,14 @@ export class UserFormComponent implements OnChanges {
     return this.mode === 'update';
   }
 
-  constructor(private fb: FormBuilder) {}
+  public get isFormDisabled(): boolean {
+    return this.userForm.status === 'PENDING';
+  }
+
+  constructor(
+    private fb: FormBuilder,
+    private uniqueUserNameValidator: UniqueUserNameValidator
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user']) {
@@ -58,9 +66,6 @@ export class UserFormComponent implements OnChanges {
         this.createForm();
         this.patchForm();
       }
-    }
-    if (changes['validationErrors']) {
-      this.userForm.setErrors(this.validationErrors);
     }
   }
 
@@ -80,16 +85,19 @@ export class UserFormComponent implements OnChanges {
 
   createForm() {
     this.userForm = this.fb.group({
-      username: ['', Validators.required],
+      username: [
+        '',
+        Validators.required,
+        this.uniqueUserNameValidator.validate.bind(
+          this.uniqueUserNameValidator
+        ),
+      ],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: [
         '',
-        [
-          Validators.required,
-          Validators.pattern(StrongPasswordRegx),
-        ],
+        [Validators.required, Validators.pattern(StrongPasswordRegx)],
       ],
       repeatPassword: ['', [Validators.required]],
       type: ['', [Validators.required]],
@@ -97,10 +105,14 @@ export class UserFormComponent implements OnChanges {
   }
 
   onSubmit() {
-    if (this.userForm.invalid) {
+    if (!this.userForm.valid) {
       return;
     }
-    this.submitForm.emit({ ...this.user, ...this.userForm.value });
+    if (this.user.id) {
+      this.save.emit({ ...this.user, ...this.userForm.value });
+    } else {
+      this.create.emit({ ...this.user, ...this.userForm.value });
+    }
   }
 
   onDelete(user: User) {

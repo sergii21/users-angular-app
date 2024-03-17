@@ -14,12 +14,17 @@ import { UserStoreService } from '../../services/user-store.service';
 })
 export class UserFormContainerComponent implements OnInit {
   user$: Observable<User> = of(newUser);
+
   constructor(private userStoreService: UserStoreService) {}
+
   ngOnInit(): void {
     this.user$ = this.userStoreService.selectCurrentUser();
   }
-  onSubmitForm(user: User) {
-    this.userStoreService.submitForm(user);
+  onCreate(user: User) {
+    this.userStoreService.create(user);
+  }
+  onSave(user: User) {
+    this.userStoreService.save(user);
   }
   onDelete(user: User) {
     this.userStoreService.delete(user);

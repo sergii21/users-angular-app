@@ -21,26 +21,26 @@ export const initialState: UsersState = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(UsersActions.addUser, (state, action) =>
+  on(UsersActions.addUserSuccess, (state, action) =>
     adapter.addOne(action.user, state)
   ),
   on(UsersActions.upsertUser, (state, action) =>
     adapter.upsertOne(action.user, state)
   ),
   on(UsersActions.addUsers, (state, action) =>
-    adapter.addMany(action.users, state)
+    adapter.addMany(action.users, { ...state, isUserFormVisible: false })
   ),
   on(UsersActions.upsertUsers, (state, action) =>
     adapter.upsertMany(action.users, state)
   ),
-  on(UsersActions.updateUser, (state, action) =>
-    adapter.updateOne(action.user, state)
+  on(UsersActions.updateUserSuccess, (state, action) =>
+    adapter.updateOne(action.user, { ...state, isUserFormVisible: false })
   ),
   on(UsersActions.updateUsers, (state, action) =>
     adapter.updateMany(action.users, state)
   ),
-  on(UsersActions.deleteUser, (state, action) =>
-    adapter.removeOne(action.id, state)
+  on(UsersActions.deleteUserSuccess, (state, action) =>
+    adapter.removeOne(action.id, { ...state, isUserFormVisible: false })
   ),
   on(UsersActions.deleteUsers, (state, action) =>
     adapter.removeMany(action.ids, state)

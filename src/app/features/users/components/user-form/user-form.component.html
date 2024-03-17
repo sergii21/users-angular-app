@@ -8,31 +8,60 @@
       <label class="label" for=""
         >Username<span class="label_hint">*</span></label
       >
-      <input class="input" type="text" formControlName="username" appFormControlValidationMsg validationMsgId="username"/>
+      <input
+        class="input"
+        type="text"
+        formControlName="username"
+        appFormControlValidationMsg
+        validationMsgId="username"
+      />
       <!-- <span class="hint hint-error"></span> -->
     </div>
     <div class="form-control">
       <label class="label" for=""
         >First name<span class="label_hint">*</span></label
       >
-      <input class="input" type="text" formControlName="firstName" appFormControlValidationMsg validationMsgId="firstName"/>
+      <input
+        class="input"
+        type="text"
+        formControlName="firstName"
+        appFormControlValidationMsg
+        validationMsgId="firstName"
+      />
       <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for=""
         >Last name<span class="label_hint">*</span></label
       >
-      <input class="input" type="text" formControlName="lastName" appFormControlValidationMsg validationMsgId="lastName"/>
+      <input
+        class="input"
+        type="text"
+        formControlName="lastName"
+        appFormControlValidationMsg
+        validationMsgId="lastName"
+      />
       <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for="">Email<span class="label_hint">*</span></label>
-      <input class="input" type="text" formControlName="email" appFormControlValidationMsg validationMsgId="email"/>
+      <input
+        class="input"
+        type="text"
+        formControlName="email"
+        appFormControlValidationMsg
+        validationMsgId="email"
+      />
       <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for="">Type<span class="label_hint">*</span></label>
-      <select class="select" formControlName="type" appFormControlValidationMsg validationMsgId="type">
+      <select
+        class="select"
+        formControlName="type"
+        appFormControlValidationMsg
+        validationMsgId="type"
+      >
         <option value="Admin">Admin</option>
         <option value="Driver">Driver</option>
       </select>
@@ -42,14 +71,26 @@
       <label class="label" for=""
         >Password<span class="label_hint">*</span></label
       >
-      <input class="input" type="text" formControlName="password" appFormControlValidationMsg validationMsgId="password"/>
+      <input
+        class="input"
+        type="text"
+        formControlName="password"
+        appFormControlValidationMsg
+        validationMsgId="password"
+      />
       <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for=""
         >Repeat password<span class="label_hint">*</span></label
       >
-      <input class="input" type="text" formControlName="repeatPassword" appFormControlValidationMsg validationMsgId="repeatPassword"/>
+      <input
+        class="input"
+        type="text"
+        formControlName="repeatPassword"
+        appFormControlValidationMsg
+        validationMsgId="repeatPassword"
+      />
       <span class="hint hint-error"></span>
     </div>
 
@@ -58,19 +99,30 @@
         *ngIf="isCreateMode"
         class="button button_color-primary button_center"
         type="submit"
-        appFormSubmitValidationMsg [validationControl]="userForm"
-      >Create</button>
+        [disabled]="isFormDisabled"
+        appFormSubmitValidationMsg
+        [validationControl]="userForm"
+      >
+        Create
+      </button>
       <button
         *ngIf="isUpdateMode"
+        type="button"
         class="button button_color-danger"
         (click)="onDelete(user)"
-      >Delete</button>
+      >
+        Delete
+      </button>
       <button
         *ngIf="isUpdateMode"
         class="button button_color-primary"
         type="submit"
-        appFormSubmitValidationMsg [validationControl]="userForm"
-      >Save</button>
+        [disabled]="isFormDisabled"
+        appFormSubmitValidationMsg
+        [validationControl]="userForm"
+      >
+        Save
+      </button>
     </div>
   </form>
 </div>
