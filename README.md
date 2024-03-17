@@ -1,4 +1,5 @@
-<img width="1527" alt="image" src="https://github.com/sergii21/users-angular-app/assets/26361223/f5791313-c281-4772-b352-212e2fe2c8c9">
+
+[screen-capture (7).webm](https://github.com/sergii21/users-angular-app/assets/26361223/91702064-a78f-4c4e-9868-459d5cc05305)
 
 # UsersAngularApp
 
