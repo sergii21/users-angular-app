@@ -15,7 +15,6 @@
         appFormControlValidationMsg
         validationMsgId="username"
       />
-      <!-- <span class="hint hint-error"></span> -->
     </div>
     <div class="form-control">
       <label class="label" for=""
@@ -28,7 +27,6 @@
         appFormControlValidationMsg
         validationMsgId="firstName"
       />
-      <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for=""
@@ -41,7 +39,6 @@
         appFormControlValidationMsg
         validationMsgId="lastName"
       />
-      <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for="">Email<span class="label_hint">*</span></label>
@@ -52,7 +49,6 @@
         appFormControlValidationMsg
         validationMsgId="email"
       />
-      <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for="">Type<span class="label_hint">*</span></label>
@@ -65,7 +61,6 @@
         <option value="Admin">Admin</option>
         <option value="Driver">Driver</option>
       </select>
-      <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for=""
@@ -73,12 +68,11 @@
       >
       <input
         class="input"
-        type="text"
+        type="password"
         formControlName="password"
         appFormControlValidationMsg
         validationMsgId="password"
       />
-      <span class="hint hint-error"></span>
     </div>
     <div class="form-control">
       <label class="label" for=""
@@ -86,12 +80,16 @@
       >
       <input
         class="input"
-        type="text"
+        type="password"
         formControlName="repeatPassword"
         appFormControlValidationMsg
         validationMsgId="repeatPassword"
       />
-      <span class="hint hint-error"></span>
+      <span
+        *ngIf="(repeatPassword.dirty || password.dirty) && userForm.errors?.['repeatPassword']"
+        class="hint hint-error"
+        >Repeat password should match to password</span
+      >
     </div>
 
     <div class="footer">

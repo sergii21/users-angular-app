@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { User } from '../../models/user';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
@@ -17,9 +18,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormControlValidationMsgDirective } from '../../../../shared/directives/formcontrol-validation-msg.directive';
 import { FormSubmitValidationMsgDirective } from '../../../../shared/directives/formsubmit-validation-msg.directive';
-
-export const StrongPasswordRegx: RegExp =
-  /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
+import { StrongPasswordRegx } from '../../consts/strong-password-regex';
+import { repeatPasswordValidator } from '../../validators/repeat-password.validator';
 
 @Component({
   selector: 'app-user-form',
@@ -50,6 +50,14 @@ export class UserFormComponent implements OnChanges {
 
   public get isFormDisabled(): boolean {
     return this.userForm.status === 'PENDING';
+  }
+
+  public get password(): AbstractControl {
+    return this.userForm.get('password') as AbstractControl;
+  }
+
+  public get repeatPassword(): AbstractControl {
+    return this.userForm.get('repeatPassword') as AbstractControl;
   }
 
   constructor(
@@ -84,24 +92,27 @@ export class UserFormComponent implements OnChanges {
   }
 
   createForm() {
-    this.userForm = this.fb.group({
-      username: [
-        '',
-        Validators.required,
-        this.uniqueUserNameValidator.validate.bind(
-          this.uniqueUserNameValidator
-        ),
-      ],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [Validators.required, Validators.pattern(StrongPasswordRegx)],
-      ],
-      repeatPassword: ['', [Validators.required]],
-      type: ['', [Validators.required]],
-    });
+    this.userForm = this.fb.group(
+      {
+        username: [
+          '',
+          Validators.required,
+          this.uniqueUserNameValidator.validate.bind(
+            this.uniqueUserNameValidator
+          ),
+        ],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [Validators.required, Validators.pattern(StrongPasswordRegx)],
+        ],
+        repeatPassword: ['', [Validators.required]],
+        type: ['', [Validators.required]],
+      },
+      { validators: repeatPasswordValidator }
+    );
   }
 
   onSubmit() {
