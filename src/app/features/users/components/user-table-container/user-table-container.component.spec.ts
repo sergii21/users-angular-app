@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserTableContainerComponent } from './user-table-container.component';
+import { UserStoreService } from '../../services/user-store.service';
+import { userStoreServiceSpy } from '../../services/user-store.service.spec';
 
 describe('UserTableContainerComponent', () => {
   let component: UserTableContainerComponent;
@@ -8,10 +10,15 @@ describe('UserTableContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserTableContainerComponent]
-    })
-    .compileComponents();
-    
+      imports: [UserTableContainerComponent],
+      providers: [
+        {
+          provide: UserStoreService,
+          useValue: userStoreServiceSpy,
+        },
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(UserTableContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

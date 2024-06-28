@@ -3,6 +3,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { UsersEffects } from './users.effects';
+import { provideToastr } from 'ngx-toastr';
 
 describe('UsersEffects', () => {
   let actions$: Observable<unknown>;
@@ -12,8 +13,9 @@ describe('UsersEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         UsersEffects,
-        provideMockActions(() => actions$)
-      ]
+        provideMockActions(() => actions$),
+        provideToastr(),
+      ],
     });
 
     effects = TestBed.inject(UsersEffects);

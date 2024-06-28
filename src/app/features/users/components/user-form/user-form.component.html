@@ -3,7 +3,7 @@
   <h2 class="h2 h2_space-bottom" *ngIf="isUpdateMode">
     {{ user.firstName }} {{ user.lastName }}
   </h2>
-  <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+  <form (ngSubmit)="onSubmit()" data-testid="form" [formGroup]="userForm">
     <div class="form-control">
       <label class="label" for=""
         >Username<span class="label_hint">*</span></label
@@ -11,6 +11,7 @@
       <input
         class="input"
         type="text"
+        data-testid="username"
         formControlName="username"
         appFormControlValidationMsg
         validationMsgId="username"
@@ -23,6 +24,7 @@
       <input
         class="input"
         type="text"
+        data-testid="firstName"
         formControlName="firstName"
         appFormControlValidationMsg
         validationMsgId="firstName"
@@ -35,6 +37,7 @@
       <input
         class="input"
         type="text"
+        data-testid="lastName"
         formControlName="lastName"
         appFormControlValidationMsg
         validationMsgId="lastName"
@@ -46,6 +49,7 @@
         class="input"
         type="text"
         formControlName="email"
+        data-testid="email"
         appFormControlValidationMsg
         validationMsgId="email"
       />
@@ -54,6 +58,7 @@
       <label class="label" for="">Type<span class="label_hint">*</span></label>
       <select
         class="select"
+        data-testid="type"
         formControlName="type"
         appFormControlValidationMsg
         validationMsgId="type"
@@ -69,6 +74,7 @@
       <input
         class="input"
         type="password"
+        data-testid="password"
         formControlName="password"
         appFormControlValidationMsg
         validationMsgId="password"
@@ -82,6 +88,7 @@
         class="input"
         type="password"
         formControlName="repeatPassword"
+        data-testid="repeatPassword"
         appFormControlValidationMsg
         validationMsgId="repeatPassword"
       />

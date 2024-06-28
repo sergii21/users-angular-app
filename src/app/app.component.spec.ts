@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
+const title = 'Users';
+
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,13 +19,13 @@ describe('AppComponent', () => {
   it(`should have the 'users-angular-app' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('users-angular-app');
+    expect(app.title).toEqual(title);
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, users-angular-app');
+    expect(compiled.querySelector('h1')?.textContent).toContain(title);
   });
 });

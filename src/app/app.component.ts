@@ -10,4 +10,6 @@ import { UsersComponent } from './features/users/main/users.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'Users'
+}

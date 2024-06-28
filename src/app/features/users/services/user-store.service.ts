@@ -18,6 +18,9 @@ export class UserStoreService {
     return this.store.select(UserSelectors.selectAll);
   }
 
+  selectUsersView(): Observable<User> {
+    return this.store.select(UserViewSelectors.selectUsersView);
+  }
   selectCurrentUser(): Observable<User> {
     return this.store.select(UserViewSelectors.selectCurrentUser);
   }
@@ -45,6 +48,8 @@ export class UserStoreService {
     this.store.dispatch(UsersActions.addUser({ user }));
   }
   save(user: User) {
-    this.store.dispatch(UsersActions.updateUser({ user: { id: user.id, changes: user } }));
+    this.store.dispatch(
+      UsersActions.updateUser({ user: { id: user.id, changes: user } })
+    );
   }
 }

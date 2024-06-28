@@ -23,3 +23,12 @@ export const selectCurrentUser = createSelector(
   (entities, currentUserId) =>
     (entities[currentUserId] ? entities[currentUserId] : newUser) as User
 );
+
+// const usersViewFn = (user: User) => user;
+
+// export type UsersView =
+
+export const selectUsersView = createSelector(
+  selectCurrentUser,
+  (user) => user
+)

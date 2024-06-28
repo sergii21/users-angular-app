@@ -7,11 +7,10 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { User } from '../../models/user';
+import { User, newUser } from '../../models/user';
 import {
   AbstractControl,
-  FormBuilder,
-  FormGroup,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -34,11 +33,34 @@ import { repeatPasswordValidator } from '../../validators/repeat-password.valida
   styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent implements OnChanges {
-  @Input() user!: User;
+  @Input() user: User = newUser;
+
   @Output() create = new EventEmitter<User>();
   @Output() save = new EventEmitter<User>();
   @Output() delete = new EventEmitter<User>();
-  userForm!: FormGroup;
+
+  userForm = this.fb.group(
+    {
+      id: this.user.id,
+      username: [
+        '',
+        Validators.required,
+        this.uniqueUserNameValidator.validate.bind(
+          this.uniqueUserNameValidator
+        ),
+      ],
+      firstName: [this.user.firstName, Validators.required],
+      lastName: [this.user.lastName, Validators.required],
+      email: [this.user.email, [Validators.required, Validators.email]],
+      password: [
+        this.user.password,
+        [Validators.required, Validators.pattern(StrongPasswordRegx)],
+      ],
+      repeatPassword: [this.user.repeatPassword, [Validators.required]],
+      type: [this.user.type, [Validators.required]],
+    },
+    { validators: repeatPasswordValidator }
+  );
   mode: 'create' | 'update' = 'create';
 
   public get isCreateMode(): boolean {
@@ -61,19 +83,14 @@ export class UserFormComponent implements OnChanges {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private fb: NonNullableFormBuilder,
     private uniqueUserNameValidator: UniqueUserNameValidator
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user']) {
       this.setMode();
-      if (this.userForm) {
-        this.patchForm();
-      } else {
-        this.createForm();
-        this.patchForm();
-      }
+      this.patchForm();
     }
   }
 
@@ -91,38 +108,16 @@ export class UserFormComponent implements OnChanges {
     }
   }
 
-  createForm() {
-    this.userForm = this.fb.group(
-      {
-        username: [
-          '',
-          Validators.required,
-          this.uniqueUserNameValidator.validate.bind(
-            this.uniqueUserNameValidator
-          ),
-        ],
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        password: [
-          '',
-          [Validators.required, Validators.pattern(StrongPasswordRegx)],
-        ],
-        repeatPassword: ['', [Validators.required]],
-        type: ['', [Validators.required]],
-      },
-      { validators: repeatPasswordValidator }
-    );
-  }
-
   onSubmit() {
+    console.log(this.userForm, this.user);
+
     if (!this.userForm.valid) {
       return;
     }
     if (this.user.id) {
-      this.save.emit({ ...this.user, ...this.userForm.value });
+      this.save.emit(this.userForm.getRawValue());
     } else {
-      this.create.emit({ ...this.user, ...this.userForm.value });
+      this.create.emit(this.userForm.getRawValue());
     }
   }
 
